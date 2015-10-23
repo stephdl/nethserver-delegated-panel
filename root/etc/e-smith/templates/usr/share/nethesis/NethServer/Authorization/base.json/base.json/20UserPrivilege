@@ -1,0 +1,47 @@
+{
+use strict;
+use warnings;
+
+use esmith::AccountsDB;
+use esmith::DB;
+
+my $a = esmith::AccountsDB->open;
+my @users = $a->users();
+
+foreach my $users (@users) {
+    my $name = $users->key;
+    my $prop = $a->get_prop("$name",'AdminPanels') || '';
+    next if ($prop eq '');
+    my @panel = split(",", ($prop || "") );
+
+$OUT .=<<'HERE'
+,
+    {
+        "Id": 13891047425,
+        "Final": true,
+        "Effect": "ALLOW",
+HERE
+;
+
+    $OUT.= qq (        "Subject": "$name",\n);
+    $OUT.= qq (        "Action": "*",\n);
+    $OUT.= qq (        "Resource": ["SomeoneElse OR Oneself","Nethgui\\\\System\\\\EsmithDatabase:*",);
+
+    my $count = 1;
+
+    foreach my $panel (@panel) {
+        my $countarray = scalar @panel;
+
+        $OUT.= qq("NethServer\\\\Module\\\\);
+        $OUT.= qq ($panel:*",) if ($count < $countarray);
+        $OUT.= qq ($panel:*") if ($count == $countarray);
+        $count++;
+    }
+
+    $OUT .= qq (],\n);
+    $OUT.= qq (        "Description":\n);
+    $OUT.= qq (        "The user $name has no restrictions to $prop"\n);
+    $OUT.='    }';
+
+}
+}
