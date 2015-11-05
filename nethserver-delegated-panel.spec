@@ -1,5 +1,5 @@
 %define name nethserver-delegated-panel
-%define version 0.0.1
+%define version 0.0.2
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 05 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.2-1.sme
+- corrected path to template
+
 * Fri Oct 23 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.1-1.sme
 - First commit
 
