@@ -7,21 +7,26 @@ use esmith::DB;
 
 my $a = esmith::AccountsDB->open;
 my @users = $a->users();
+my $Id = 14000000000;
 
 foreach my $users (@users) {
     my $name = $users->key;
     my $prop = $a->get_prop("$name",'AdminPanels') || '';
+    my $adminallpanel = $a->get_prop("$name",'AdminAllPanels') || '';
+    $prop = '*' if ($adminallpanel eq 'enabled');
+
     next if ($prop eq '');
     my @panel = split(",", ($prop || "") );
 
-$OUT .=<<'HERE'
+$OUT .=<<"HERE"
 ,
     {
-        "Id": 13891047425,
+        "Id": $Id,
         "Final": true,
         "Effect": "ALLOW",
 HERE
 ;
+$Id++;
 
     $OUT.= qq (        "Subject": "$name",\n);
     $OUT.= qq (        "Action": "*",\n);
