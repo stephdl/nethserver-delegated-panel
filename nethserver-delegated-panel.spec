@@ -13,8 +13,7 @@ Source: %{name}-%{version}.tar.gz
 BuildArchitectures: noarch
 BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 BuildRequires: nethserver-devtools
-Requires: nethserver-directory
-AutoReqProv: no
+#Requires: nethserver-directory
 
 %description
 Delegate the usage of  panels to users or groups
@@ -29,7 +28,7 @@ perl createlinks
 rm -rf $RPM_BUILD_ROOT
 (cd root ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
 rm -f %{name}-%{version}-filelist
-/sbin/e-smith/genfilelist $RPM_BUILD_ROOT \
+%{genfilelist} $RPM_BUILD_ROOT \
      > %{name}-%{version}-filelist
 
 %clean
@@ -37,6 +36,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
+%dir %{_nseventsdir}/%{name}-update
 
 %pre
 
