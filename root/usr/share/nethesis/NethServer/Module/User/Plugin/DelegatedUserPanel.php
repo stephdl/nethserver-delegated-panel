@@ -37,6 +37,8 @@ class DelegatedUserPanel extends \Nethgui\Controller\Table\RowPluginAction
       $values = glob( $path . '*.{php}', GLOB_BRACE);
       $values= str_replace($path,"",$values);
       $values= str_replace(".php","",$values);
+      #we remove some panels 
+      $values= array_diff($values, array ('FirstConfigWiz'));
       return $values;
     }
 
