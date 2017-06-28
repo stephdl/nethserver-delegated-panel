@@ -19,7 +19,7 @@ foreach my $users (@users) {
     my @panel = split(",", ($prop || "") );
 
 $OUT .=<<"HERE"
-,
+
     {
         "Id": $Id,
         "Final": true,
