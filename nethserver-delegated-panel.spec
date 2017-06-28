@@ -1,6 +1,6 @@
 %define name nethserver-delegated-panel
 
-%define version 0.0.3
+%define version 0.0.4
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -31,6 +31,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -f %{name}-%{version}-filelist
 /sbin/e-smith/genfilelist $RPM_BUILD_ROOT \
      > %{name}-%{version}-filelist
+echo "%doc COPYING" >> %{name}-%{version}-filelist
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -44,12 +45,16 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sun Nov 11 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.3-1.sme
+* Wed Jun 28 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.4-1
+- Created a new specific file DelegatedPanel.json
+- Added COPYING
+
+* Sun Nov 11 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.3-1
 - Added a plugin of delegation in User and Group panel
 
-* Thu Nov 05 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.2-1.sme
+* Thu Nov 05 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.2-1
 - corrected path to template
 
-* Fri Oct 23 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.1-1.sme
+* Fri Oct 23 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.1-1
 - First commit
 
