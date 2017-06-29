@@ -9,6 +9,10 @@ my $a = esmith::AccountsDB->open;
 my @users = $a->users();
 my $Id = 14000000000;
 
+#dirty hack fixme
+#the foreach boucle starts by a comma
+$OUT .="{\n}";
+
 foreach my $users (@users) {
     my $name = $users->key;
     my $prop = $a->get_prop("$name",'AdminPanels') || '';
@@ -20,6 +24,7 @@ foreach my $users (@users) {
 
 $OUT .=<<"HERE"
 
+,
     {
         "Id": $Id,
         "Final": true,
