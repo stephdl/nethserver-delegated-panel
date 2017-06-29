@@ -48,6 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 * Wed Jun 28 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.4-1
 - Created a new specific file DelegatedPanel.json
 - Added COPYING
+- Created translation files for user and group plugin
 
 * Sun Nov 11 2015 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.3-1
 - Added a plugin of delegation in User and Group panel
