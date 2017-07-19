@@ -1,12 +1,13 @@
 {
 use strict;
 use warnings;
-
-use esmith::AccountsDB;
 use esmith::DB;
+use esmith::ConfigDB;
 
-my $a = esmith::AccountsDB->open;
-my @users = $a->users();
+my $ddb = esmith::ConfigDB->open_ro('delegations') 
+    || esmith::ConfigDB->create('delegations');
+
+my @users = $ddb->get_all_by_prop('type', 'user'); 
 my $Id = 14000000000;
 
 #we start by denying access
@@ -25,11 +26,13 @@ $OUT .= '
 
 foreach my $users (@users) {
     my $name = $users->key;
-    my $prop = $a->get_prop("$name",'AdminPanels') || '';
-    my $adminallpanel = $a->get_prop("$name",'AdminAllPanels') || '';
+    #we just want the username
+    $name =~ s/\@.+$//g;
+    my $prop = $users->prop('AdminPanels') || '';
+    my $adminallpanel = $users->prop('AdminAllPanels') || '';
     $prop = '*' if ($adminallpanel eq 'enabled');
-
     next if ($prop eq '');
+
     my @panel = split(",", ($prop || "") );
 
 $OUT .=<<"HERE"

@@ -1,5 +1,6 @@
 <?php
-$L['DelegatedGroupPanel_Title'] = 'Group delegations';
+$L['DelegatedPanel_Title'] = 'Panel delegations';
+$L['DelegatedPanel_Description'] = 'Grant groups or users to manage your system';
 $L['AdminAllPanels_label'] = 'Delegate all panels';
 $L['AdminPanels_label'] = 'Delegate panels';
 $L['AdminTodo'] = 'Admin todo messages';
@@ -61,4 +62,17 @@ $L['VPN'] = 'VPN manager';
 $L['WebVirtMgr'] = 'Virtual machine manager';
 $L['Workgroup'] = 'Windows network';
 $L['YumCron'] = 'Automatic updates';
-
+$L['Key_label'] = 'Name';
+$L['User_Title'] = 'User';
+$L['Group_Title'] = 'Group';
+$L['DelegatedPanel'] = 'Panel delegations';
+$L['Account'] = 'Users and groups';
+$L['VirtualHosts'] = 'Virtual Hosts';
+$L['MailAccount'] = 'Email addresses';
+$L['MailQueue'] = 'Mail queue';
+$L['MailQuota'] = 'Mail quota';
+$L['SssdConfig'] = 'Account provider';
+$L['Sssd'] = 'Domain accounts';
+$L['Shell'] = 'Terminal';
+$L['Services'] = 'Services status';
+$L['Modify_header'] = 'Panel delegation to `${0}`';

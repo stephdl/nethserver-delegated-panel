@@ -1,32 +1,26 @@
 <?php
-namespace NethServer\Module\User\Plugin;
+namespace NethServer\Module\DelegatedPanel\Group;
 
 
 use Nethgui\System\PlatformInterface as Validate;
 use Nethgui\Controller\Table\Modify as Table;
 
 /**
- * delegated user plugin panel
+ * CRUD actions on group delegation  records
  *
- * @author stephane de labrusse <stephdl@de-labrusse.fr>
  */
-class DelegatedUserPanel extends \Nethgui\Controller\Table\RowPluginAction
+class Modify extends \Nethgui\Controller\Table\Modify
 {
-
-    protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)
-    {
-        return \Nethgui\Module\SimpleModuleAttributesProvider::extendModuleAttributes($base, 'DelegatedUserPanel', 20);
-    }
 
     public function initialize()
     {
-        
-        $schema = array(
+        $parameterSchema = array(
+            array('groupname', Validate::ANYTHING, Table::KEY),
             array('AdminPanels', Validate::ANYTHING, Table::FIELD, 'AdminPanels',','),
             array('AdminAllPanels', $this->createValidator()->memberOf('enabled','disabled'), Table::FIELD),
         );
+        $this->setSchema($parameterSchema);
 
-        $this->setSchemaAddition($schema);
         parent::initialize();
     }
 
@@ -42,6 +36,29 @@ class DelegatedUserPanel extends \Nethgui\Controller\Table\RowPluginAction
       return $values;
     }
 
+    private function saveProps()
+
+    {
+        $props = array();
+        $db = $this->getPlatform()->getDatabase('delegations');
+        $group = $this->parameters['groupname'];
+        $allpanels = $this->parameters['AdminAllPanels'];
+        $panels = implode (',',(json_decode(json_encode($this->parameters['AdminPanels']),true)));
+
+        $db->setKey($group, 'group', array(
+            'AdminPanels' => $panels,
+            'AdminAllPanels' => $allpanels));
+    }
+
+    public function process()
+    {
+        if ($this->getRequest()->isMutation()) {
+             $this->saveProps();
+             $this->getParent()->getAdapter()->flush();
+             $this->getPlatform()->signalEvent('nethserver-delegated-panel-save');
+        }
+    }
+
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
@@ -51,7 +68,6 @@ class DelegatedUserPanel extends \Nethgui\Controller\Table\RowPluginAction
         $view['AdminPanelsDatasource'] = array_map(function($fmt) use ($view) {
             return array($fmt, $view->translate($fmt));
         }, $this->templates);
-
 
     }
 
