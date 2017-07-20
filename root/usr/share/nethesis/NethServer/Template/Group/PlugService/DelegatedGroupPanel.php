@@ -1,4 +1,7 @@
 <?php
 
-echo $view->checkBox('AdminAllPanels','enabled')->setAttribute('uncheckedValue', 'disabled');
-echo $view->selector('AdminPanels', $view::SELECTOR_MULTIPLE);
+echo $view->fieldsetSwitch('AdminAllPanels', 'enabled')->setAttribute('label', $T('AdminAllPanels_label'));
+
+echo $view->fieldsetSwitch('AdminAllPanels', 'disabled', $view::FIELDSET_EXPANDABLE)
+    ->setAttribute('label', $T('AdminEachPanel_label'))
+    ->insert($view->selector('AdminPanels', $view::SELECTOR_MULTIPLE));

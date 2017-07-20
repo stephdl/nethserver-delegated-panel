@@ -1,7 +1,8 @@
 <?php
 $L['DelegatedGroupPanel_Title'] = 'Group delegations';
 $L['AdminAllPanels_label'] = 'Delegate all panels';
-$L['AdminPanels_label'] = 'Delegate panels';
+$L['AdminPanels_label'] = 'List of panels';
+$L['AdminEachPanel_label'] = 'Delegate each panel';
 $L['AdminTodo'] = 'Admin todo messages';
 $L['BackupConfig'] = 'Backup configuration';
 $L['BackupData'] = 'Backup data';
