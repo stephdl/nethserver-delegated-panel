@@ -2,7 +2,7 @@
 $L['DelegatedPanel_Title'] = 'Panel delegations';
 $L['DelegatedPanel_Description'] = 'Grant groups or users to manage your system';
 $L['AdminAllPanels_label'] = 'Delegate all panels';
-$L['AdminPanels_label'] = 'Delegate panels';
+$L['AdminPanels_label'] = 'List of panels';
 $L['AdminTodo'] = 'Admin todo messages';
 $L['BackupConfig'] = 'Backup configuration';
 $L['BackupData'] = 'Backup data';
@@ -76,3 +76,5 @@ $L['Sssd'] = 'Domain accounts';
 $L['Shell'] = 'Terminal';
 $L['Services'] = 'Services status';
 $L['Modify_header'] = 'Panel delegation to `${0}`';
+$L['AdminEachPanel_label'] = 'Delegate each panel';
+
