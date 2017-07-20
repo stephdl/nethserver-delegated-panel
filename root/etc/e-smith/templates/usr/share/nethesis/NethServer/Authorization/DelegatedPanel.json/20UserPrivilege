@@ -25,8 +25,8 @@ $OUT .= '
 
 foreach my $users (@users) {
     my $name = $users->key;
-    my $prop = $a->get_prop("$name",'AdminPanels') || '';
-    my $adminallpanel = $a->get_prop("$name",'AdminAllPanels') || '';
+    my $prop = $users->prop('AdminPanels') || '';
+    my $adminallpanel = $users->prop('AdminAllPanels') || '';
     $prop = '*' if ($adminallpanel eq 'enabled');
 
     next if ($prop eq '');

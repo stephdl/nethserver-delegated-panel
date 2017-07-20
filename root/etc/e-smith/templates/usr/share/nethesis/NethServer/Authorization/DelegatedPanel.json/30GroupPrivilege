@@ -11,8 +11,8 @@ my $Id = 15000000000;
 
 foreach my $groups (@groups) {
     my $name = $groups->key;
-    my $prop = $a->get_prop("$name",'AdminPanels') || '';
-    my $adminallpanel = $a->get_prop("$name",'AdminAllPanels') || '';
+    my $prop = $groups->prop('AdminPanels') || '';
+    my $adminallpanel = $groups->prop('AdminAllPanels') || '';
     $prop = '*' if ($adminallpanel eq 'enabled');
 
     next if ($prop eq '');
