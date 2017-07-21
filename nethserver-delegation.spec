@@ -1,4 +1,4 @@
-%define name nethserver-delegated-panel
+%define name nethserver-delegation
 
 %define version 0.1.2
 %define release 1
@@ -13,7 +13,6 @@ Source: %{name}-%{version}.tar.gz
 BuildArchitectures: noarch
 BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 BuildRequires: nethserver-devtools
-#Requires: nethserver-directory
 AutoReqProv: no
 
 %description
