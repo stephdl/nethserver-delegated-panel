@@ -2,10 +2,10 @@
 
 use esmith::Build::CreateLinks qw(:all);
 
-my $event = 'nethserver-delegated-panel-update';
+my $event = 'nethserver-delegation-update';
 
 event_actions($event, 'initialize-default-databases' => '00');
 
-foreach my $event (qw ( nethserver-delegated-panel-update nethserver-delegated-panel-save)) {
+foreach my $event (qw ( nethserver-delegation-update nethserver-delegation-save)) {
 templates2events("/usr/share/nethesis/NethServer/Authorization/DelegatedPanel.json",  $event);
 }

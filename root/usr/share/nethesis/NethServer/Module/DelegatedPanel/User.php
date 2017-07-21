@@ -3,7 +3,7 @@
 namespace NethServer\Module\DelegatedPanel;
 
 /**
- * Description of nethserver-delegated-panel
+ * Description of nethserver-delegation
  *
  * @author stephane de Labrusse <stephdl@de-labrusse.fr>
  */
