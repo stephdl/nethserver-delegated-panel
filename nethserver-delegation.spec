@@ -1,4 +1,4 @@
-%define name nethserver-delegated-panel
+%define name nethserver-delegation
 
 %define version 0.0.7
 %define release 1
