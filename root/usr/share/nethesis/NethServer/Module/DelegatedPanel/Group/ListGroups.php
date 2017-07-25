@@ -16,7 +16,9 @@ class ListGroups extends \Nethgui\Adapter\LazyLoaderAdapter
     
     private $defaults = array (
         'AdminPanels' => '',
-        'AdminAllPanels' => '',
+        'AdminAllPanels' => 'disabled',
+        'sudo' => '',
+        'sudoCommands' => '',
     );
 
     private function getValue($group, $prop)

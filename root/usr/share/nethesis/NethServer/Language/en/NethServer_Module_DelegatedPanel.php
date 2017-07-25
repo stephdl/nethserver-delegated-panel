@@ -2,7 +2,7 @@
 $L['DelegatedPanel_Title'] = 'Panel delegations';
 $L['DelegatedPanel_Description'] = 'Grant groups or users to manage your system';
 $L['AdminAllPanels_label'] = 'Delegate all panels';
-$L['AdminPanels_label'] = 'List of panels';
+$L['AdminPanels_label'] = 'Delegate each panel';
 $L['AdminTodo'] = 'Admin todo messages';
 $L['BackupConfig'] = 'Backup configuration';
 $L['BackupData'] = 'Backup data';
@@ -77,4 +77,13 @@ $L['Shell'] = 'Terminal';
 $L['Services'] = 'Services status';
 $L['Modify_header'] = 'Panel delegation to `${0}`';
 $L['AdminEachPanel_label'] = 'Delegate each panel';
-
+$L['sudo_label'] = 'Sudo Access';
+$L['NoDelegation'] = 'No delegations';
+$L['Enabled_label'] = 'Enabled';
+$L['Disabled_label'] = 'Disabled';
+$L['PanelDelegation'] = 'permissions granted';
+$L['ListOfPanels_label'] = 'List of available panels';
+$L['CheckAll_label'] = 'Check all';
+$L['sudoCommands_label'] = 'Allowed commands(empty to become root)';
+$L['valid_Custom_Binary_Exclusion'] = '`${0}` is not executable or the binary path is not good';
+$L['ErrorSudoCommand_label'] = 'Sudo delegation error';

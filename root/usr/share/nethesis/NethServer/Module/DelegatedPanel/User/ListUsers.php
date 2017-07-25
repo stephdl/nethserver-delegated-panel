@@ -16,7 +16,9 @@ class ListUsers extends \Nethgui\Adapter\LazyLoaderAdapter
     
     private $defaults = array (
         'AdminPanels' => '',
-        'AdminAllPanels' => '',
+        'AdminAllPanels' => 'disabled',
+        'sudo' => '',
+        'sudoCommands' => '',
     );
 
     private function getValue($user, $prop)
@@ -65,3 +67,4 @@ class ListUsers extends \Nethgui\Adapter\LazyLoaderAdapter
     }
 
 }
+

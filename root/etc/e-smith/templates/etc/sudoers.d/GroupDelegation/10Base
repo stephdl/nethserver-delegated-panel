@@ -1,0 +1,35 @@
+{
+use strict;
+use warnings;
+use esmith::DB;
+use esmith::ConfigDB;
+
+my $ddb = esmith::ConfigDB->open_ro('delegations') 
+    || esmith::ConfigDB->create('delegations');
+
+my @groups = $ddb->get_all_by_prop('type', 'group'); 
+
+foreach my $groups (@groups) {
+    my $name = $groups->key;
+    my $sudo = $groups->prop('sudo') || 'disabled';
+    next if ($sudo eq 'disabled');
+
+    #we just want the username
+    $name =~ s/\@.+$//g;
+
+    my $sudoCommands = $groups->prop('sudoCommands') || '';
+    $sudoCommands =~ s/,/, /g;
+
+    $OUT .= "\n#sudo access enabled for $name\n";
+
+    if ($sudoCommands eq '') {
+        $OUT .= "\%$name    ALL=(ALL)  PASSWD: ALL\n";
+    }
+
+    elsif ($sudoCommands ne '') {
+#        $OUT .= "Cmnd_Alias " . uc ($name) . "_COMMANDS = $sudoCommands\n";
+#        $OUT .= "\%$name   ALL=PASSWD: ". uc ($name) . "_COMMANDS\n";
+        $OUT .= "\%$name   ALL= PASSWD: $sudoCommands\n";
+    }
+ }
+}
