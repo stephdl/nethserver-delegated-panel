@@ -49,7 +49,7 @@ class Group extends \Nethgui\Controller\TableController
 
     public function prepareViewForColumnAdminPanels(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
-        if ($values['AdminPanels'] !== '' ) {
+        if ($values['AdminPanels'] !== '' and $values['AdminAllPanels'] == 'disabled') {
             return $view->translate('PanelDelegation');
         }
         return $view->translate('NoDelegation');
