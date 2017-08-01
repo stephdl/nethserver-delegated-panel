@@ -9,15 +9,18 @@ echo $view->fieldsetSwitch('sudo', 'enabled', $view::FIELDSETSWITCH_EXPANDABLE |
     ->setAttribute('uncheckedValue', 'disabled')
     ->insert($view->textArea('sudoCommands', $view::LABEL_ABOVE)->setAttribute('dimensions', '5x30'));
 
-echo $view->fieldsetSwitch('AdminAllPanels', 'enabled')->setAttribute('label', $T('AdminAllPanels_label'));
 
-echo $view->fieldsetSwitch('AdminAllPanels', 'disabled', $view::FIELDSET_EXPANDABLE)
+echo ($view->fieldsetSwitch('panelsDelegation','enabled', $view::FIELDSETSWITCH_EXPANDABLE | $view::FIELDSETSWITCH_CHECKBOX)
+    ->setAttribute('uncheckedValue', 'disabled')
+    ->insert($view->fieldsetSwitch('AdminAllPanels', 'enabled')->setAttribute('label', $T('AdminAllPanels_label')))
+    ->insert($view->fieldsetSwitch('AdminAllPanels', 'disabled', $view::FIELDSET_EXPANDABLE)
     ->setAttribute('label', $T('AdminEachPanel_label'))
-    ->insert($view->selector('AdminPanels', $view::SELECTOR_MULTIPLE)->setAttribute('label', $T('ListOfPanels_label')));
+    ->insert($view->selector('AdminPanels', $view::SELECTOR_MULTIPLE)->setAttribute('label', $T('ListOfPanels_label'))))
+);
 
 echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_CANCEL | $view::BUTTON_HELP);
 
-$checkboxJson = json_encode((string) $view->checkBox('CheckAll','disabled'));  
+$checkboxJson = json_encode((string) $view->checkBox('CheckAll','disabled'));
 $checkboxId = $view->getUniqueId('CheckAll');
 $categoriesTarget = $view->getClientEventTarget('AdminPanels');
 $view->includeJavascript(" 

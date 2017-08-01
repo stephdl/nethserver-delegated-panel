@@ -20,6 +20,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
             array('AdminAllPanels', $this->createValidator()->memberOf('enabled','disabled'), Table::FIELD),
             array('sudo', $this->createValidator()->memberOf('enabled','disabled'), Table::FIELD),
             array('sudoCommands', Validate::ANYTHING, Table::FIELD),
+            array('panelsDelegation', $this->createValidator()->memberOf('enabled','disabled'), Table::FIELD),
         );
         $this->setSchema($parameterSchema);
 
@@ -50,12 +51,14 @@ class Modify extends \Nethgui\Controller\Table\Modify
         $sudo = $this->parameters['sudo'];
         $sudoCommands = $this->parameters['sudoCommands'];
         $panels = implode (',',(json_decode(json_encode($this->parameters['AdminPanels']),true)));
+        $delegation = $this->parameters['panelsDelegation'];
 
         $db->setKey($user, 'user', array(
             'AdminPanels' => $panels,
             'AdminAllPanels' => $allpanels,
             'sudo' => $sudo,
-            'sudoCommands' => $sudoCommands));
+            'sudoCommands' => $sudoCommands,
+            'panelsDelegation' => $delegation));
     }
 
 
@@ -91,8 +94,9 @@ class Modify extends \Nethgui\Controller\Table\Modify
             $forwards = $this->parameters['sudoCommands'];
             if($forwards) {
                 foreach(explode(',', $forwards) as $param) {
+                    $mustStart = preg_match ("/^\/\w+/", $param);
 //                  if (!file_exists($param)) {
-                    if (!is_executable($param)){
+                    if (!is_executable($param) or ! $mustStart){
                         $report->addValidationErrorMessage($this, 'ErrorSudoCommand',
                             'valid_Custom_Binary_Exclusion', array($param));
                     }

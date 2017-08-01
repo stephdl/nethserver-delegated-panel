@@ -34,7 +34,7 @@ class User extends \Nethgui\Controller\TableController
 
     public function prepareViewForColumnAdminAllPanels(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
-        if ($values['AdminAllPanels'] == 'enabled' ) {
+        if ($values['AdminAllPanels'] == 'enabled' and $values['panelsDelegation'] == 'enabled') {
             return $view->translate('Enabled_label');
         }
         return $view->translate('Disabled_label');
@@ -50,7 +50,7 @@ class User extends \Nethgui\Controller\TableController
 
     public function prepareViewForColumnAdminPanels(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
-        if ($values['AdminPanels'] !== '' and $values['AdminAllPanels'] == 'disabled') {
+        if ($values['AdminPanels'] !== '' and $values['AdminAllPanels'] == 'disabled' and $values['panelsDelegation'] == 'enabled') {
             return $view->translate('PanelDelegation');
         }
         return $view->translate('NoDelegation');

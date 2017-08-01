@@ -29,7 +29,7 @@ foreach my $groups (@groups) {
     elsif ($sudoCommands ne '') {
 #        $OUT .= "Cmnd_Alias " . uc ($name) . "_COMMANDS = $sudoCommands\n";
 #        $OUT .= "\%$name   ALL=PASSWD: ". uc ($name) . "_COMMANDS\n";
-        $OUT .= "\%$name   ALL= PASSWD: $sudoCommands\n";
+        $OUT .= "\%$name   ALL= PASSWD:NOEXEC: $sudoCommands\n";
     }
  }
 }
