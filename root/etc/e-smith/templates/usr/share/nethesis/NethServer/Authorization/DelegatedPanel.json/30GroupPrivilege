@@ -17,9 +17,12 @@ foreach my $groups (@groups) {
     $name =~ s/\@.+$//g;
     my $prop = $groups->prop('AdminPanels') || '';
     my $adminallpanel = $groups->prop('AdminAllPanels') || '';
+    my $panelsDelegation = $groups->prop('panelsDelegation') || 'disabled';
     $prop = '*' if ($adminallpanel eq 'enabled');
 
     next if ($prop eq '');
+    next if ($panelsDelegation eq 'disabled');
+
     my @panel = split(",", ($prop || "") );
 
     $OUT .=<<"HERE"

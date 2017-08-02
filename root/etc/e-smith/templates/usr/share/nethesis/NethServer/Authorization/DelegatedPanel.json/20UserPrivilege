@@ -30,8 +30,11 @@ foreach my $users (@users) {
     $name =~ s/\@.+$//g;
     my $prop = $users->prop('AdminPanels') || '';
     my $adminallpanel = $users->prop('AdminAllPanels') || '';
+    my $panelsDelegation = $users->prop('panelsDelegation') || 'disabled';
     $prop = '*' if ($adminallpanel eq 'enabled');
+
     next if ($prop eq '');
+    next if ($panelsDelegation eq 'disabled');
 
     my @panel = split(",", ($prop || "") );
 
