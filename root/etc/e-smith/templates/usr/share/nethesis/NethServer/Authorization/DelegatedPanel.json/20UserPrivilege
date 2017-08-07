@@ -27,9 +27,11 @@ foreach my $users (@users) {
     my $name = $users->key;
     my $prop = $users->prop('AdminPanels') || '';
     my $adminallpanel = $users->prop('AdminAllPanels') || '';
+    my $panelsDelegation = $users->prop('panelsDelegation') || 'disabled';
     $prop = '*' if ($adminallpanel eq 'enabled');
 
     next if ($prop eq '');
+    next if ($panelsDelegation eq 'disabled');
     my @panel = split(",", ($prop || "") );
 
 $OUT .=<<"HERE"

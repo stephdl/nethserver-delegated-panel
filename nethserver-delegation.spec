@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.0.7
+%define version 0.0.8
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Aug 7 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.8-1
+- NS7 version backported
+- Sudo can be delegated
+- Panel can be delegated per group or user
+
 * Thu Jul 20 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.7-1
 - minor changes on variable initiations
 - New UI (FIELDSET_EXPANDABLE)

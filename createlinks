@@ -5,8 +5,15 @@ use esmith::Build::CreateLinks qw(:all);
 my $event = 'nethserver-delegation-update';
 
 event_actions($event, 'initialize-default-databases' => '00');
-templates2events("/usr/share/nethesis/NethServer/Authorization/DelegatedPanel.json",  $event);
 
-foreach my $event (qw ( user-create user-modify user-delete group-create  group-delete  group-modify)) {
-templates2events("/usr/share/nethesis/NethServer/Authorization/DelegatedPanel.json",  $event);
+foreach my $event (qw ( nethserver-delegation-update 
+                        user-create 
+                        user-modify 
+                        user-delete 
+                        group-create  
+                        group-delete  
+                        group-modify)) {
+    templates2events("/usr/share/nethesis/NethServer/Authorization/DelegatedPanel.json",  $event);
+    templates2events("/etc/sudoers.d/GroupDelegation",  $event);
+    templates2events("/etc/sudoers.d/UserDelegation", $event);
 }

@@ -1,5 +1,5 @@
 <?php
-$L['DelegatedUserPanel_Title'] = 'User delegations';
+$L['_Title'] = 'Delegation of authority';
 $L['AdminAllPanels_label'] = 'Delegate all panels';
 $L['AdminPanels_label'] = 'List of panels';
 $L['AdminEachPanel_label'] = 'Delegate each panel';
@@ -62,4 +62,29 @@ $L['VPN'] = 'VPN manager';
 $L['WebVirtMgr'] = 'Virtual machine manager';
 $L['Workgroup'] = 'Windows network';
 $L['YumCron'] = 'Automatic updates';
-
+$L['Key_label'] = 'Name';
+$L['User_Title'] = 'User';
+$L['Group_Title'] = 'Group';
+$L['DelegatedPanel'] = 'Panel delegations';
+$L['Account'] = 'Users and groups';
+$L['VirtualHosts'] = 'Virtual Hosts';
+$L['MailAccount'] = 'Email addresses';
+$L['MailQueue'] = 'Mail queue';
+$L['MailQuota'] = 'Mail quota';
+$L['SssdConfig'] = 'Account provider';
+$L['Sssd'] = 'Domain accounts';
+$L['Shell'] = 'Terminal';
+$L['Services'] = 'Services status';
+$L['Modify_header'] = 'Panel delegation to `${0}`';
+$L['AdminEachPanel_label'] = 'Delegate each panel';
+$L['sudo_label'] = 'Sudo power';
+$L['NoDelegation'] = 'No delegations';
+$L['Enabled_label'] = 'Enabled';
+$L['Disabled_label'] = 'Disabled';
+$L['PanelDelegation'] = 'permissions granted';
+$L['ListOfPanels_label'] = 'List of available panels';
+$L['CheckAll_label'] = 'Check all';
+$L['sudoCommands_label'] = 'Allowed commands(empty to become root)';
+$L['valid_Custom_Binary_Exclusion'] = '`${0}` is not executable or the binary path is not good';
+$L['ErrorSudoCommand_label'] = 'Sudo delegation error';
+$L['panelsDelegation_label'] = 'Delegation of panel';
