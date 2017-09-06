@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.0.8
+%define version 0.0.9
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Sep 6 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.9-1
+- Automatic activation of the shell access if the sudo power is enabled
+
 * Mon Aug 7 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.8-1
 - NS7 version backported
 - Sudo can be delegated

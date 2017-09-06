@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use esmith::AccountsDB;
+my $a = esmith::AccountsDB->open;
+my $event = shift;
+my $name  = shift;
+
+my $sudo = $a->get_prop($name,'sudo') || 'disabled';
+
+if ($sudo eq 'enabled') {
+    $a->set_prop($name,'Shell','/bin/bash');
+}
