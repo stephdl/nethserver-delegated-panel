@@ -67,7 +67,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
         if ($this->getRequest()->isMutation()) {
              $this->saveProps();
              $this->getParent()->getAdapter()->flush();
-             $this->getPlatform()->signalEvent('nethserver-delegation-save');
+             $this->getPlatform()->signalEvent('nethserver-delegation-save', array($this->parameters['username']));
         }
     }
 

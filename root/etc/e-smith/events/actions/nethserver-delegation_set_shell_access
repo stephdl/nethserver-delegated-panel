@@ -1,0 +1,64 @@
+#!/usr/bin/perl
+
+use NethServer::SSSD;
+use esmith::ConfigDB;
+my $db = esmith::ConfigDB->open_ro('delegations') 
+    || esmith::ConfigDB->create('delegations');
+my $sssd = new NethServer::SSSD();
+
+my $event = shift;
+my $userName = shift;
+
+exit(0) unless defined $userName;
+
+my $shell = $db->get_prop($userName,'sudo') || 'disabled';
+
+my $bindPassword = $sssd->bindPassword();
+my $baseDN = $sssd->baseDN();
+my $bindDN = $sssd->bindDN();
+my $host = $sssd->host();
+
+if (($sssd->isLdap) && ($shell eq 'enabled')){
+    if ($userName =~ /@/) {
+        $userName = (split(/@/,$userName))[0];
+    }
+
+    system('/usr/sbin/lusermod',
+        '--shell=/bin/bash',
+        $userName);
+
+    if($? != 0) {
+        die("[ERROR] Failed to modify user `$userName` fields!\n");
+    }
+}
+elsif(($sssd->isAD) && ($shell eq 'enabled')){
+        if ($userName =~ /@/) {
+        $userName = (split(/@/,$userName))[0];
+    }
+
+    my $filename = '/tmp/modify.ldif';
+    chmod 0600, $filename;
+
+    my $contentFile = qq (
+dn: cn=$userName,cn=Users,$baseDN
+changetype: modify
+replace: loginShell
+loginShell: /bin/bash
+);
+
+    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+    print $fh $contentFile;
+    close $fh;
+
+    system('/usr/bin/ldapmodify', 
+            '-Z', '-h', $host, 
+            '-D', $bindDN, 
+            '-w', $bindPassword, 
+            '-f', $filename);
+
+    if($? != 0) {
+        die("[ERROR] Failed to modify user `$userName` fields!\n");
+    }
+unlink $filename;
+}
+

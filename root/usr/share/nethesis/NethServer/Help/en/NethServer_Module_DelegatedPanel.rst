@@ -11,9 +11,9 @@ Keep in Mind the 3 rules of administrator
     2) Think before you type.
     3) With great power comes great responsibility.
 
-Sudo power
-    You can give the sudo power to a user or a group. If no commands are given,
-    then there is no sudo restriction. You must give the correct path to the command. 
+Sudo privilege
+    You can give the sudo privilege to a user or a group. If no commands are given,
+    then there is no sudo restriction. You must give the correct path to the command.
 
 
 Delegation of panel
