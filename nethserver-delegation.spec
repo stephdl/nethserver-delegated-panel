@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.1.6
+%define version 0.1.7
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Sep 09 2017 stephane de LAbrusse <stephdl@de-labrusse.fr> 0.1.7-1.ns7
+- ldif file creation with a random name
+- chmod ldif file 0600
+- remove the key name when the user/group is deleted
+
 * Fri Sep 08 2017 stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.6-1.ns7
 - Automatic activation of the shell access if the sudo power is enabled
 

@@ -36,9 +36,7 @@ elsif(($sssd->isAD) && ($shell eq 'enabled')){
         $userName = (split(/@/,$userName))[0];
     }
 
-    my $filename = '/tmp/modify.ldif';
-    chmod 0600, $filename;
-
+    my $filename = "/tmp/$userName-". sprintf("%08X", rand(0xFFFFFFFF)).".ldif";
     my $contentFile = qq (
 dn: cn=$userName,cn=Users,$baseDN
 changetype: modify
@@ -47,6 +45,7 @@ loginShell: /bin/bash
 );
 
     open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+    chmod 0600, $filename;
     print $fh $contentFile;
     close $fh;
 
@@ -61,4 +60,3 @@ loginShell: /bin/bash
     }
 unlink $filename;
 }
-

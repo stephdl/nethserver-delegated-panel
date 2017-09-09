@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use esmith::ConfigDB;
+my $db = esmith::ConfigDB->open('delegations')
+    || esmith::ConfigDB->create('delegations');
+
+my $event = shift;
+my $userName = shift;
+
+die 'no username argument given' unless defined $userName;
+
+my $dbkey = $db->get($userName);
+$dbkey->delete if defined $dbkey;

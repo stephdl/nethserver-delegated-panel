@@ -12,3 +12,7 @@ templates2events("/etc/sudoers.d/GroupDelegation",  $event);
 templates2events("/etc/sudoers.d/UserDelegation",  $event);
 event_actions($event, 'nethserver-delegation_set_shell_access'=> '01');
 }
+
+foreach my $event (qw (user-delete group-delete)) {
+event_actions($event, 'nethserver-delegation_delete_user_delegations_database'=> '60');
+}
