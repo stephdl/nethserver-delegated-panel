@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.1.7
+%define version 0.1.8
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Sep 18 2017 stephane de LAbrusse <stephdl@de-labrusse.fr> 0.1.8-1.ns7
+- Allow Admin todo by default
+
 * Sat Sep 09 2017 stephane de LAbrusse <stephdl@de-labrusse.fr> 0.1.7-1.ns7
 - ldif file creation with a random name
 - chmod ldif file 0600
