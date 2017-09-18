@@ -35,6 +35,7 @@ HERE
     $OUT.= qq (        "Action": "*",\n);
     $OUT.= qq (        "Resource": ["SomeoneElse OR Oneself",\n\t);
     $OUT.= qq (        "Nethgui\\\\System\\\\EsmithDatabase:*",);
+    $OUT.= qq (        "NethServer\\\\Module\\\\AdminTodo:*",);
 
     my $count = 1;
 

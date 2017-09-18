@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.0.10
+%define version 0.0.11
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Sep 18 2017 stephane de LAbrusse <stephdl@de-labrusse.fr> 0.0.11-1
+- Allow Admin todo by default
+
 * Fri Sep 08 2017 stephane de labrusse <stephdl@de-labrusse.fr> 0.0.10-1
 - Translation
 
