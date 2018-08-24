@@ -2,6 +2,10 @@
 
 use NethServer::SSSD;
 use esmith::ConfigDB;
+use File::Temp;
+use strict;
+use Errno;
+
 my $db = esmith::ConfigDB->open_ro('delegations') 
     || esmith::ConfigDB->create('delegations');
 my $sssd = new NethServer::SSSD();
@@ -12,11 +16,6 @@ my $userName = shift;
 exit(0) unless defined $userName;
 
 my $shell = $db->get_prop($userName,'sudo') || 'disabled';
-
-my $bindPassword = $sssd->bindPassword();
-my $baseDN = $sssd->baseDN();
-my $bindDN = $sssd->bindDN();
-my $host = $sssd->host();
 
 if (($sssd->isLdap) && ($shell eq 'enabled')){
     if ($userName =~ /@/) {
@@ -32,31 +31,37 @@ if (($sssd->isLdap) && ($shell eq 'enabled')){
     }
 }
 elsif(($sssd->isAD) && ($shell eq 'enabled')){
-        if ($userName =~ /@/) {
-        $userName = (split(/@/,$userName))[0];
-    }
 
-    my $filename = "/tmp/$userName-". sprintf("%08X", rand(0xFFFFFFFF)).".ldif";
-    my $contentFile = qq (
-dn: cn=$userName,cn=Users,$baseDN
+    #accept user@domain format
+    $userName =~ s/@.*//;
+
+    #Create a temporary ldif file (root:root 0600)
+    my $fileFullPath = File::Temp->new(
+        TEMPLATE => "$userName.XXXXXXXXXX",
+        DIR => '/var/lib/machines/nsdc/var/spool/'
+    );
+
+    #retrieve the dn from samaccountname
+    my $dn = qx(nsdc-run -- /usr/bin/ldbsearch -H /var/lib/samba/private/sam.ldb "samaccountname=$userName" dn | sed -n '/^dn: / { s/\r// ; p ; q }');
+    chomp $dn;
+
+    #print the content
+    print $fileFullPath qq (
+$dn
 changetype: modify
 replace: loginShell
 loginShell: /bin/bash
 );
 
-    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-    chmod 0600, $filename;
-    print $fh $contentFile;
-    close $fh;
+    close($fileFullPath);
 
-    system('/usr/bin/ldapmodify', 
-            '-Z', '-h', $host, 
-            '-D', $bindDN, 
-            '-w', $bindPassword, 
-            '-f', $filename);
+    #we need the relative path in the container
+    my $fileRelativePath = $fileFullPath; 
+    $fileRelativePath =~ s|/var/lib/machines/nsdc||;
 
-    if($? != 0) {
-        die("[ERROR] Failed to modify user `$userName` fields!\n");
+    #modif the samba LDAP
+    system(qw(nsdc-run -- /usr/bin/ldbmodify -H /var/lib/samba/private/sam.ldb), $fileRelativePath);
+    if ($? != 0) {
+        die("[ERROR] User $userName shell modification failed\n");
     }
-unlink $filename;
 }
