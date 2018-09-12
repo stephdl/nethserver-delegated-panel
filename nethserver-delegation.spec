@@ -1,6 +1,6 @@
 %define name nethserver-delegation
 
-%define version 0.1.9
+%define version 0.1.10
 %define release 1
 Summary: Delegate the usage of  panels to users or groups
 Name: %{name}
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Sep 12 2018 stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.10-1.ns7
+- subscribe nethserver-sssd-save event explicitly
+
 * Fri Aug 24 2018 stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.9-1.ns7
 - Use sam.ldb to authenticate in samba ldap
 
